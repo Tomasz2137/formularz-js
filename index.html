@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="dane">Imię i nawzwisko</label>
+        <input type="text" id="dane" name="imie/nazwisko"><br>
+        <label for="wyksztalcenie">Wykształcenie</label>
+        <select id="wyksztalcenie" name="Wykształcenie">
+            <option value="podstawowe">Podstawowe</option>
+            <option value="branżowe">Branżowe</option>
+            <option value="średnie">Średnie</option>
+            <option value="wyższe">Wyższe</option>
+        </select><br>
+        <label for="osoba">Osoba:</label><br>
+        <label for="osoba">Uczeń</label>
+        <input type="radio" id="Uczeń" name="osoba" value="Uczeń">
+        <label for="osoba">Nauczyciel</label>
+        <input type="radio" id="Nauczyciel" name="osoba" value="Nauczyciel"><br>
+        <button type="button" id="przyciskRejestracji" onclick="wyswietlPodsumowanie()">Zarejestruj</button>
+    </form>
+    <div id="podsumowanie"></div>
+    <script>
+    function wyswietlPodsumowanie() {
+        const imieNazwisko = document.getElementById("dane").value;
+        const wydarzenieSelect = document.getElementById("wyksztalcenie")
+        const wydarzenie = wydarzenieSelect.options[wydarzenieSelect.selectedIndex].text;
+        const kategoria = document.querySelector('input[name="kategoria"]:checked').value;
+        const zgdaCheckbox = document.getElementById("zgoda");
+        let statusZgody = "";
+        if (zgodaCheckbox.checked) {
+            statusZgody = "Wyrażono zgodę na przetwarzanie danych osobowych"
+            
+        } else {
+            statusZgody = "Nie wyrażono zgody na przetwarzanie danych osobowych";
+        }
+
+        let podsumowanieHTML ="<h3>Podsumowanie rejestracji</h3>";
+        podsumowanieHTML += "<p><strong>Imię i nazwisko:</strong>" + imieNazwisko + "</p>"
+        podsumowanieHTML += "<p><strong>Wybrane wykształcenie:</strong>" + wydarzenie + "</p>"
+        podsumowanieHTML += "<p><strong>Kategoria uczestnika:</strong>" + kategoria + "</p>"
+        podsumowanieHTML += "<p><strong>Status zgody:</strong>" + statusZgody + "</p>"
+
+        const podsumowanieDiv = document.getElementById("podsumowanie");
+        podsumowanieDiv.innerHTML = podsumowanieHTML;
+    }
+    </script>
+</body>
+</html>
