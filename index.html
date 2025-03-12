@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styl.css">
     <title>Document</title>
 </head>
 <body>
@@ -17,33 +18,45 @@
             <option value="wyższe">Wyższe</option>
         </select><br>
         <label for="osoba">Osoba:</label><br>
-        <label for="osoba">Uczeń</label>
-        <input type="radio" id="Uczeń" name="osoba" value="Uczeń">
-        <label for="osoba">Nauczyciel</label>
-        <input type="radio" id="Nauczyciel" name="osoba" value="Nauczyciel"><br>
+        <label for="Uczeń">Uczeń</label>
+        <input type="radio" id="Uczeń" name="kategoria" value="Uczeń">
+        <label for="Nauczyciel">Nauczyciel</label>
+        <input type="radio" id="Nauczyciel" name="kategoria" value="Nauczyciel">
+        <label for="Gość">Gość</label>
+        <input type="radio" id="Gość" name="kategoria" value="Gość"><br>
+        <label for="zgoda">Zgoda na przetwarzanie danych osobowych</label>
+        <input type="checkbox" id="zgoda" name="zgoda"><br>
         <button type="button" id="przyciskRejestracji" onclick="wyswietlPodsumowanie()">Zarejestruj</button>
-    </form>
+    </form><br>
     <div id="podsumowanie"></div>
     <script>
     function wyswietlPodsumowanie() {
-        const imieNazwisko = document.getElementById("dane").value;
-        const wydarzenieSelect = document.getElementById("wyksztalcenie")
-        const wydarzenie = wydarzenieSelect.options[wydarzenieSelect.selectedIndex].text;
-        const kategoria = document.querySelector('input[name="kategoria"]:checked').value;
-        const zgdaCheckbox = document.getElementById("zgoda");
+        let imieNazwisko = document.getElementById("dane").value;
+        const wyksztalcenieSelect = document.getElementById("wyksztalcenie");
+        const wyksztalcenie = wyksztalcenieSelect.options[wyksztalcenieSelect.selectedIndex].text;
+        let kategoriaElement = document.querySelector('input[name="kategoria"]:checked');
+        let kategoria = kategoriaElement ? kategoriaElement.value : "";
+        const zgodaCheckbox = document.getElementById("zgoda");
         let statusZgody = "";
+        if (imieNazwisko == "")
+            {
+            imieNazwisko = "Nie wprowadzono danych";
+        if (kategoria == "") {
+            alert("Proszę wybrać kategorię uczestnika.");
+            return;
+        }
+        }
         if (zgodaCheckbox.checked) {
-            statusZgody = "Wyrażono zgodę na przetwarzanie danych osobowych"
-            
+            statusZgody = "Wyrażono zgodę na przetwarzanie danych osobowych";
         } else {
             statusZgody = "Nie wyrażono zgody na przetwarzanie danych osobowych";
         }
 
-        let podsumowanieHTML ="<h3>Podsumowanie rejestracji</h3>";
-        podsumowanieHTML += "<p><strong>Imię i nazwisko:</strong>" + imieNazwisko + "</p>"
-        podsumowanieHTML += "<p><strong>Wybrane wykształcenie:</strong>" + wydarzenie + "</p>"
-        podsumowanieHTML += "<p><strong>Kategoria uczestnika:</strong>" + kategoria + "</p>"
-        podsumowanieHTML += "<p><strong>Status zgody:</strong>" + statusZgody + "</p>"
+        let podsumowanieHTML = "<h3>Podsumowanie</h3>";
+        podsumowanieHTML += "<p><strong>Imię i nazwisko:</strong> " + imieNazwisko + "</p>";
+        podsumowanieHTML += "<p><strong>Wybrane wykształcenie:</strong> " + wyksztalcenie + "</p>";
+        podsumowanieHTML += "<p><strong>Kategoria uczestnika:</strong> " + kategoria + "</p>";
+        podsumowanieHTML += "<p><strong>Status zgody:</strong> " + statusZgody + "</p>";
 
         const podsumowanieDiv = document.getElementById("podsumowanie");
         podsumowanieDiv.innerHTML = podsumowanieHTML;
