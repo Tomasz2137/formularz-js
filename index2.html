@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Zmiana Koloru Tabeli</title>
+        <style>
+            table {
+                width: 50%;
+                border-collapse: collapse;
+                margin: 20px 0;
+                border: 1px solid black;
+            }
+            th, td {
+                padding: 8px;
+
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h2>Tabela</h2>
+        <table id="myTable">
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+            </tr>
+            <tr>
+                <td>Jan</td>
+                <td>Kowalski</td>
+            </tr>
+            <tr>
+                <td>Anna</td>
+                <td>Nowak</td>
+            </tr>
+        </table>
+        <h2>Formularz zmiany koloru tabeli</h2>
+        <form id="colorForm">
+            <label for="bgColor">Kolor tła tabeli:</label>
+            <input type="text" id="bgColor" placeholder="np. lightblue">
+            <select id="borderStyle" name="Styl obramowania">
+                <option value="Solid">Solid</option>
+                <option value="Dashed">Dashed</option>
+                <option value="Dotted">Dotted</option>
+                <option value="Double">Double</option>
+            </select>
+            <input type="text" id="textColor" placeholder="np.red">
+            <button type="button" onclick="applyColor()">Zastosuj</button>
+        </form>
+        <script>
+            function applyColor() {
+                var table = document.getElementById('myTable');
+                var borderStyle = document.getElementById('borderStyle').value;
+                var bgColor = document.getElementById('bgColor').value;
+                table.style.backgroundColor = bgColor;
+                table.style.border = "1px " + borderStyle + " black";
+                cell.style.fontSize = fontSize + "px";
+                }
+        </script>
+    </body>
+</html>
